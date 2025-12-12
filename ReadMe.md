@@ -27,8 +27,6 @@ Spring Cloud Consul (Service Discovery)
 
 MySQL 8
 
-Lombok
-
 Gradle (Build tool)
 
 ## 📁 Project Structure (Monorepo Example)

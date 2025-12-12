@@ -1,14 +1,12 @@
 package com.microservice.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "loans")
-@Data
 public class Loan {
 
     @Id

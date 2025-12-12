@@ -1,12 +1,10 @@
 package com.microservice.dto;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
 public class LoanRequest {
     @NotNull
     private BigDecimal loanAmount;
