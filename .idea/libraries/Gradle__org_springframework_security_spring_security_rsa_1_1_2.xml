@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.security:spring-security-rsa:1.1.2" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.security" artifactId="spring-security-rsa" version="1.1.2" baseVersion="1.1.2" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../company projects/Projects/practice3/practice3/caches/modules-2/files-2.1/org.springframework.security/spring-security-rsa/1.1.2/ca388d615a60199186ec248ac2a9806a76db4014/spring-security-rsa-1.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

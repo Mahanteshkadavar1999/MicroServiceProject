@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="api-gateway" target="21" />
+      <module name="api-gateway.main" target="21" />
+      <module name="api-gateway.test" target="21" />
+      <module name="auth-service" target="21" />
+      <module name="auth-service.main" target="21" />
+      <module name="auth-service.test" target="21" />
+      <module name="com.microservice" target="21" />
+      <module name="com.microservice.api-gateway" target="21" />
+      <module name="com.microservice.api-gateway.main" target="21" />
+      <module name="com.microservice.api-gateway.test" target="21" />
+      <module name="com.microservice.microservice-loan-application" target="21" />
+      <module name="com.microservice.microservice-loan-application.main" target="21" />
+      <module name="com.microservice.microservice-loan-application.test" target="21" />
+      <module name="common-lib" target="21" />
+      <module name="common-lib.main" target="21" />
+      <module name="common-lib.test" target="21" />
+      <module name="customer-service" target="21" />
+      <module name="customer-service.main" target="21" />
+      <module name="customer-service.test" target="21" />
+      <module name="discovery-service" target="21" />
+      <module name="discovery-service.main" target="21" />
+      <module name="discovery-service.test" target="21" />
+      <module name="loan-service" target="21" />
+      <module name="loan-service.main" target="21" />
+      <module name="loan-service.test" target="21" />
+      <module name="service-discovery" target="21" />
+      <module name="service-discovery.main" target="21" />
+      <module name="service-discovery.test" target="21" />
+      <module name="untitled.main" target="21" />
+      <module name="untitled.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
