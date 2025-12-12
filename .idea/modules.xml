@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/api-gateway.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service.iml" filepath="$PROJECT_DIR$/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-lib.iml" filepath="$PROJECT_DIR$/.idea/modules/common-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-lib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common-lib.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-lib.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common-lib.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customer-service.iml" filepath="$PROJECT_DIR$/customer-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discovery-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/discovery-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/discovery-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/discovery-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loan-service.iml" filepath="$PROJECT_DIR$/loan-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/loan-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/loan-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/loan-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/loan-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/microservice-loan-application.iml" filepath="$PROJECT_DIR$/.idea/microservice-loan-application.iml" />
+    </modules>
+  </component>
+</project>
