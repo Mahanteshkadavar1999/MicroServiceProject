@@ -6,12 +6,13 @@ import com.microservice.repository.LoanRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Service
 public class LoanService {
@@ -19,38 +20,38 @@ public class LoanService {
     private static final Logger log = LoggerFactory.getLogger(LoanService.class);
 
     @Autowired
-    LoanRepository loanRepository;
+    private LoanRepository loanRepository;
 
     @Autowired
-    WebClient.Builder webClient;
+    private WebClient.Builder webClient;
 
-    public Loan applyLoan(Long customerId, LoanRequest req,String token) {
+    public ResponseEntity<?> applyLoan(Long customerId, LoanRequest req, String token) {
+
         log.info("Applying loan for customer {}", customerId);
 
-        // Call customer-service APIs to check if all details are present
-        Boolean isPanDetailsPresent = Objects.requireNonNull(webClient.build().get()
-                .uri("http://customer-service/customer/pan?currentCustomerId=" + customerId)
-                .header("Authorization", "Bearer " + token)
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block());
-/*
-        Boolean isIncomeDetailsPresent = Objects.requireNonNull(webClient.build()..get()
-                .uri("http://localhost:8883/customer/income")
-                .header("X-CUSTOMER-ID", customerId.toString())
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block());
+        // ========= Call customer-service to validate PAN details =========
+        Boolean isPanDetailsPresent;
 
-        Boolean isAddressDetailsPresent = Objects.requireNonNull(webClient.build()..get()
-                .uri("http://localhost:8883/customer/address")
-                .header("X-CUSTOMER-ID", customerId.toString())
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block());*/
+        try {
+            isPanDetailsPresent = webClient.build()
+                    .get()
+                    .uri("http://customer-service/customer/pan?currentCustomerId=" + customerId)
+                    .header("Authorization", "Bearer " + token)
+                    .retrieve()
+                    .bodyToMono(Boolean.class)
+                    .block();
 
-        log.info("PAN DETAILS ARE PRESENT FOR THE USER {} IS {}",customerId,isPanDetailsPresent);
-        if (isPanDetailsPresent) {
+        } catch (Exception ex) {
+            log.error("Failed to contact customer-service for PAN check: {}", ex.getMessage());
+            log.error("Failed to connect to customer-service: {}", ex.getMessage());
+            throw new RuntimeException("Customer service is down");
+        }
+
+        log.info("PAN details present for customer {} → {}", customerId, isPanDetailsPresent);
+
+        // ========= Validate customer details =========
+        if (Boolean.TRUE.equals(isPanDetailsPresent)) {
+
             Loan loan = new Loan();
             loan.setCustomerId(customerId);
             loan.setLoanAmount(req.getLoanAmount());
@@ -58,9 +59,15 @@ public class LoanService {
             loan.setLoanType(req.getLoanType());
             loan.setRequestedDate(req.getRequestedDate() != null ? req.getRequestedDate() : LocalDate.now());
             loan.setStatus("PENDING");
-            return loanRepository.save(loan);
-        } else {
-            throw new RuntimeException("Customer details incomplete for user " + customerId);
+
+            loanRepository.save(loan);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Loan application submitted successfully for customer " + customerId);
         }
+
+        // ========= If PAN is not present =========
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Customer details incomplete for user " + customerId);
     }
 }

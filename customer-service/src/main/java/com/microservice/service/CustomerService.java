@@ -81,7 +81,8 @@ public class CustomerService {
     public Boolean getPanDetails(Long customerId) {
         log.info("customer id is {}", customerId);
         Optional<PanDetails> panDetails = panRepo.findTopByCustomerIdOrderByIdDesc(customerId);
-        return panDetails.isEmpty();
+        log.info("customer pan details are  {}", panDetails);
+        return panDetails.isPresent();
     }
 
     public Boolean getIncomeDetails(Long customerId) {
