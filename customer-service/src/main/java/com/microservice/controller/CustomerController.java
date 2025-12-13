@@ -33,7 +33,7 @@ public class CustomerController {
     }
 
     @GetMapping("/pan")
-    public Boolean getPanDetails(@RequestParam Long currentCustomerId) {
+    public Boolean getPanDetails(@RequestParam Long currentCustomerId) throws Exception {
         log.info("API: Get PAN details");
         return customerService.getPanDetails(currentCustomerId);
     }

@@ -32,9 +32,7 @@ jwt:
   secret: aXW3Pz9FXa48kdfnFKE9393skfls93kdmSDF932jkLDs=
   expiration: 3600000
 
-# =========================
 # Spring Boot Actuator Config
-# =========================
 management:
   endpoints:
     web:
@@ -50,13 +48,11 @@ management:
     circuitbreakers:
       enabled: true
 
-# =========================
 # Resilience4j Circuit Breaker Config
-# =========================
 resilience4j:
   circuitbreaker:
     instances:
-      loanCb: # Circuit breaker name (can be any service or call)
+      customerService: # Circuit breaker name (can be any service or call)
         # Register health indicator in Spring Boot Actuator
         registerHealthIndicator: true
         # Number of events to store in the buffer
@@ -73,5 +69,21 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 3
         # Automatically transition from open to half-open after waitDurationInOpenState
         automaticTransitionFromOpenToHalfOpenEnabled: true
+  #Resilience4j Timeout Properties Config
+  timelimiter:
+    instances:
+      customerService:
+        time-duration: 1s
+        cancel-running-future: false
+  #Resilience4j Retry Properties Config
+  retry:
+    instances:
+      customerService:
+        max-attempts: 3
+        wait-duration: 5s
+
+
+
+
 
 

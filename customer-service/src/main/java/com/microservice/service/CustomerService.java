@@ -78,8 +78,11 @@ public class CustomerService {
         return addressRepo.save(a);
     }
 
-    public Boolean getPanDetails(Long customerId) {
+    public Boolean getPanDetails(Long customerId) throws Exception {
         log.info("customer id is {}", customerId);
+        log.info("Calling getPanDetails(): Wait Started");
+        Thread.sleep(10000);
+        log.info("Calling getPanDetails(): Wait Ended");
         Optional<PanDetails> panDetails = panRepo.findTopByCustomerIdOrderByIdDesc(customerId);
         log.info("customer pan details are  {}", panDetails);
         return panDetails.isPresent();
