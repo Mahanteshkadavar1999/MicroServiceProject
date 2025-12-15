@@ -48,39 +48,54 @@ management:
     circuitbreakers:
       enabled: true
 
-# Resilience4j Circuit Breaker Config
+# Resilience4j Configuration
 resilience4j:
+  # Circuit Breaker Settings
   circuitbreaker:
     instances:
-      customerService: # Circuit breaker name (can be any service or call)
-        # Register health indicator in Spring Boot Actuator
+      customerService:  # Circuit breaker name (used in @CircuitBreaker annotation)
+        # Enables Spring Boot Actuator health monitoring for this circuit breaker
+        # Visible under /actuator/health
         registerHealthIndicator: true
-        # Number of events to store in the buffer
+        # Stores the last 10 circuit breaker events (success, failure, state change)
+        # Useful for metrics and debugging
         event-consumer-buffer-size: 10
-        # Use count-based sliding window for failure rate calculation
+        # Uses a count-based sliding window (based on number of calls)
+        # Alternative: TIME_BASED
         slidingWindowType: COUNT_BASED
-        # Number of calls to consider in the sliding window
+        # Number of recent calls considered to calculate failure rate
         slidingWindowSize: 5
-        # Percentage of failed calls before opening the circuit
+        # Circuit opens if 50% or more of calls in the window fail
         failureRateThreshold: 50
-        # How long the circuit stays open before attempting half-open
+        # Time the circuit remains OPEN before moving to HALF_OPEN state
         waitDurationInOpenState: 5s
-        # Number of calls allowed when circuit is half-open
+        # Number of trial calls allowed in HALF_OPEN state
+        # Determines whether the circuit should close or reopen
         permittedNumberOfCallsInHalfOpenState: 3
-        # Automatically transition from open to half-open after waitDurationInOpenState
+        # Automatically moves circuit from OPEN → HALF_OPEN after wait duration
+        # If false, state transition must be triggered manually
         automaticTransitionFromOpenToHalfOpenEnabled: true
-  #Resilience4j Timeout Properties Config
+  # TimeLimiter Settings
   timelimiter:
     instances:
       customerService:
+        # Maximum time allowed for a remote call to complete
+        # If exceeded, a TimeoutException is thrown
         time-duration: 1s
+        # Determines whether the running task should be cancelled after timeout
+        # false → lets the task continue running in background
+        # true  → interrupts and cancels the running task
         cancel-running-future: false
-  #Resilience4j Retry Properties Config
+  # Retry Settings
   retry:
     instances:
       customerService:
+        # Total number of attempts (initial call + retries)
         max-attempts: 3
+        # Delay between retry attempts
+        # Helps avoid immediate repeated failures
         wait-duration: 5s
+
 
 
 
